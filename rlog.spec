@@ -13,6 +13,7 @@ License:	LGPL
 Group:		Development/C++
 Source:         %{name}-%{version}.tar.bz2
 URL:		http://freshmeat.net/projects/rlog/
+BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
 %description
 RLog provides a flexible message logging facility for C++ programs and
