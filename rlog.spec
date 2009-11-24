@@ -1,7 +1,7 @@
 %define name 		rlog
-%define version		1.3.7
-%define release		3
-%define major		1
+%define version		1.4
+%define release		1
+%define major		5
 %define libname		%mklibname %{name} %{major}
 %define libnamedev	%mklibname %{name} %{major} -d 
 
@@ -9,10 +9,10 @@ Summary: 	Runtime Logging for C++
 Name: 		%{name}
 Version: 	%{version}
 Release:        %mkrel %{release}
-License:	LGPL
+License:	LGPLv2+
 Group:		Development/C++
-Source:         %{name}-%{version}.tar.bz2
-URL:		http://freshmeat.net/projects/rlog/
+Source:         http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
+URL:		http://www.arg0.net/rlog
 BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
 %description
@@ -38,7 +38,7 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Header files and development libraries for librlog1.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %setup -q
 
@@ -48,10 +48,10 @@ CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
 make -j 2
 
 %install
-make DESTDIR=$RPM_BUILD_ROOT install
+make DESTDIR=%{buildroot} install
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
@@ -64,13 +64,12 @@ rm -rf $RPM_BUILD_ROOT
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/librlog.la
-%{_libdir}/librlog.so
-%{_libdir}/librlog.so.1
-%{_libdir}/librlog.so.1.3.4
+%{_libdir}/librlog.so.*
 
 %files -n %{libnamedev}
 %defattr(-,root,root)
-%{_includedir}/%{name}/*.h
+%{_includedir}/%{name}
+%{_libdir}/librlog.so
 %{_libdir}/pkgconfig/librlog.pc
-%{_datadir}/doc/%{name}/*
+%{_datadir}/doc/%{name}
 
