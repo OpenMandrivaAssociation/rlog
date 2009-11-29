@@ -1,6 +1,6 @@
 %define name 		rlog
 %define version		1.4
-%define release		1
+%define release		2
 %define major		5
 %define libname		%mklibname %{name} %{major}
 %define libnamedev	%mklibname %{name} %{major} -d 
@@ -23,6 +23,7 @@ libraries. It is designed to be fast enough to use in production code.
 Summary:	Libraries for rlog
 Group:		Development/C++
 Provides:	lib%{name} = %{version}-%{release}
+Obsoletes:	%mklibname %{name} 1
 
 %description -n	%{libname}
 Libraries for rlog.
@@ -33,6 +34,7 @@ Group:		Development/C++
 Requires:	lib%{name} = %{version}-%{release} 
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
+Obsoletes:	%mklibname %{name} 1 -d
 
 %description -n	%{libnamedev}
 Header files and development libraries for librlog1.
