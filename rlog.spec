@@ -13,7 +13,6 @@ License:	LGPLv2+
 Group:		Development/C++
 Source:         http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
 URL:		http://www.arg0.net/rlog
-BuildRoot: 	%{_tmppath}/%{name}-%{version}
 
 %description
 RLog provides a flexible message logging facility for C++ programs and
@@ -40,8 +39,6 @@ Obsoletes:	%mklibname %{name} 1 -d
 Header files and development libraries for librlog1.
 
 %prep
-rm -rf %{buildroot}
-
 %setup -q
 
 %build
@@ -52,20 +49,8 @@ make -j 2
 %install
 make DESTDIR=%{buildroot} install
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/librlog.la
 %{_libdir}/librlog.so.*
 
 %files -n %{libnamedev}
@@ -75,3 +60,50 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/librlog.pc
 %{_datadir}/doc/%{name}
 
+
+
+%changelog
+* Tue Dec 07 2010 Oden Eriksson <oeriksson@mandriva.com> 1.4-3mdv2011.0
++ Revision: 614709
+- the mass rebuild of 2010.1 packages
+
+* Sun Nov 29 2009 Jérôme Brenier <incubusss@mandriva.org> 1.4-2mdv2010.1
++ Revision: 471582
+- obsolete old libs (major 1)
+
+* Tue Nov 24 2009 Jérôme Brenier <incubusss@mandriva.org> 1.4-1mdv2010.1
++ Revision: 469713
+- new version 1.4
+- new major 5
+- fix license tag / URL / Source
+- fix files section
+- $RPM_BUILD_ROOT -> %%{buildroot}
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Wed Jan 02 2008 Olivier Blin <oblin@mandriva.com> 1.3.7-2mdv2008.1
++ Revision: 140746
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - import rlog
+
+
+* Wed Jun 28 2006 Lev Givon <lev@mandriva.org> 1.3.7-2mdk
+- Use mkrel, put docs in devel package
+
+* Mon Jan 09 2006 Moreno Manzini <moreno.mg@gmail.com> 1.3.7-1mdk
+- 1.3.7
+- Fixed some specs bug
+
+* Sun Jul 24 2005 Madman <madman@extenzilla.it> 1.3.6-3mdk
+- Fixed issues in specfile.
+* Mon Jun 27 2005 Madman <madman@extenzilla.it> 1.3.6-2mdk
+- Fixed issues in specfile.
+* Thu Jun 23 2005 Madman <madman@extenzilla.it> 1.3.6-1mdk
+- First release for Mandriva 2006 Cooker.
