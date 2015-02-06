@@ -1,6 +1,6 @@
 %define name 		rlog
 %define version		1.4
-%define release		4
+%define release		5
 %define major		5
 %define libname		%mklibname %{name} %{major}
 %define libnamedev	%mklibname %{name} %{major} -d 
