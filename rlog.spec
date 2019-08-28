@@ -1,55 +1,52 @@
-%define name 		rlog
-%define version		1.4
-%define release		5
-%define major		5
-%define libname		%mklibname %{name} %{major}
-%define libnamedev	%mklibname %{name} %{major} -d 
+%define major 5
+%define libname %mklibname %{name} %{major}
+%define libnamedev %mklibname %{name} %{major} -d
 
-Summary: 	Runtime Logging for C++
-Name: 		%{name}
-Version: 	%{version}
-Release:        %mkrel %{release}
+Summary:	Runtime Logging for C++
+Name:		rlog
+Version:	1.4
+Release:	6
 License:	LGPLv2+
 Group:		Development/C++
-Source0:        http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:	http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
 URL:		http://www.arg0.net/rlog
 
 %description
 RLog provides a flexible message logging facility for C++ programs and
 libraries. It is designed to be fast enough to use in production code.
 
-%package -n 	%{libname}
+%package -n %{libname}
 Summary:	Libraries for rlog
 Group:		Development/C++
-Provides:	lib%{name} = %{version}-%{release}
-Obsoletes:	%mklibname %{name} 1
+Provides:	lib%{name} = %{EVRD}
+Obsoletes:	%{mklibname %{name} 1} < 1.4-6
 
-%description -n	%{libname}
+%description -n %{libname}
 Libraries for rlog.
 
-%package -n	%{libnamedev}
+%package -n %{libnamedev}
 Summary:	Header files and development libraries for librlog1
 Group:		Development/C++
-Requires:	lib%{name} = %{version}-%{release} 
-Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
-Obsoletes:	%mklibname %{name} 1 -d
+Requires:	lib%{name} = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
+Provides:	lib%{name}-devel = %{EVRD}
+Obsoletes:	%{mklibname %{name} 1 -d} < 1.4-6
 
-%description -n	%{libnamedev}
+%description -n %{libnamedev}
 Header files and development libraries for librlog1.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
-%configure2_5x
-%make
+%configure
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
-%{_libdir}/librlog.so.*
+%{_libdir}/librlog.so.%{major}*
 
 %files -n %{libnamedev}
 %{_includedir}/%{name}
