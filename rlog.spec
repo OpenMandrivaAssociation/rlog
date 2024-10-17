@@ -9,7 +9,7 @@ Release:	6
 License:	LGPLv2+
 Group:		Development/C++
 Source0:	http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
-URL:		http://www.arg0.net/rlog
+URL:		https://www.arg0.net/rlog
 
 %description
 RLog provides a flexible message logging facility for C++ programs and
