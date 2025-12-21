@@ -11,6 +11,11 @@ Group:		Development/C++
 Source0:	http://rlog.googlecode.com/files/%{name}-%{version}.tar.gz
 URL:		https://www.arg0.net/rlog
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 RLog provides a flexible message logging facility for C++ programs and
 libraries. It is designed to be fast enough to use in production code.
